@@ -26,8 +26,12 @@ theme_set(theme_light())
 # Download T. nativa into script and create object 
 df_te_nat = read.csv("../data/GCA_001447565.2.csv")
 
+df_te_nat = read_csv("../data/GCA_001447565.2 .csv")
+df_trich_te = read_csv("../data/GCA_001447595.1 .csv")
+#ae # I added read_csv because read.csv wasn't working for me, I got an error and a warning  
+
 # Download T. spiralis into script and create object 
-df_trich_te = read.csv("../Data/GCA_001447595.1.csv")
+df_trich_te = read_csv("../Data/GCA_001447595.1.csv")
 
 
 #fixing the issue with qry_left and in_repeat_end columns for Nativa:
@@ -47,9 +51,16 @@ df_trich_te = df_trich_te |>
 ls_no_te_nat = c("Simple_repeat", "simple_repeat", "Low_complexity", "Satellite", "rRNA", "snRNA", "ARTEFACT", "Unknown")
 ls_no_te_nat
 
+
+
 # List of non-TE elements for spiralis
 ls_no_te_trich = c("Simple_repeat", "simple_repeat", "Low_complexity", "Satellite", "rRNA", "snRNA", "ARTEFACT", "Unknown")
 ls_no_te_trich
+
+ls_no_te_spira = c("Simple_repeat", "simple_repeat", "Low_complexity", "Satellite", "rRNA", "snRNA", "ARTEFACT", "Unknown")
+ls_no_te_spira
+
+#ae # I would avoid using variables with the name trich, there were lots of different strains for trichnella, it could create ambiguity when it comes to determining what strain. 
 
 #Creating a copy of the original file for possible further use before updating the original function for Nativa
 df_te_nat_org = df_te_nat
@@ -70,8 +81,8 @@ df_trich_te
 # Making sure there are not any non-TE left in Nativa
 df_te_nat$matching_class %in% ls_no_te_nat |>
   sum()
-df_te_nat |>
-  filter(matching_class %notin% ls_no_te_nat) |> View()
+
+#ae # personally, I got rid of this code "df_te_nat |>filter(matching_class %notin% ls_no_te_nat) |> View()". This is because I believed it's not needed if you are doing a sum() after filtering out the Non-TEs.  
 
 # Making sure there are not any non-TE left in Spiralis
 df_trich_te$matching_class %in% ls_no_te_trich |>
@@ -129,6 +140,7 @@ Biostrings::setdiff(ls_ts_retro_qry, ls_ts_dna_qry) |> length()
 df_dna_only = df_te_nat |>
   filter(qry_id %in% Biostrings::setdiff(ls_dna_qry, ls_retro_qry))
 df_dna_only
+
 
 #Data frame with only DNA transponsos in Spiralis
 df_ts_dnaonly = df_trich_te |>
