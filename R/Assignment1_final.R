@@ -24,10 +24,8 @@ theme_set(theme_light())
 
 ## Preparing CSV files ----
 # Download T. nativa into script and create object 
-df_te_nat = read.csv("../data/GCA_001447565.2.csv")
-
 df_te_nat = read_csv("../data/GCA_001447565.2 .csv")
-df_trich_te = read_csv("../data/GCA_001447595.1 .csv")
+
 #ae # I added read_csv because read.csv wasn't working for me, I got an error and a warning  
 
 # Download T. spiralis into script and create object 
@@ -54,9 +52,6 @@ ls_no_te_nat
 
 
 # List of non-TE elements for spiralis
-ls_no_te_trich = c("Simple_repeat", "simple_repeat", "Low_complexity", "Satellite", "rRNA", "snRNA", "ARTEFACT", "Unknown")
-ls_no_te_trich
-
 ls_no_te_spira = c("Simple_repeat", "simple_repeat", "Low_complexity", "Satellite", "rRNA", "snRNA", "ARTEFACT", "Unknown")
 ls_no_te_spira
 
